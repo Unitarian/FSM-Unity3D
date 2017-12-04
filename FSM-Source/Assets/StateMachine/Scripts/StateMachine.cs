@@ -15,9 +15,9 @@ namespace FSM
 
         protected bool EndPreviusState(State newState)
         {
-            if (CurrenState != null && CurrenState.OnEnd != null)
+            if (CurrenState != null)
             {
-                return CurrenState.OnEnd(newState);
+                return CurrenState.End(newState);
             }
             return true;
         }
@@ -35,10 +35,7 @@ namespace FSM
             PreviousState = CurrenState;
             CurrenState = newState;
 
-            if (CurrenState.OnBegin != null)
-            {
-                CurrenState.OnBegin();
-            }
+            CurrenState.Begin();
         }
 
         protected void UpdateToPreviousState()
@@ -57,17 +54,17 @@ namespace FSM
 
         protected virtual void Update()
         {
-            if (CurrenState != null && CurrenState.OnUpdate != null)
+            if (CurrenState != null)
             {
-                CurrenState.OnUpdate();
+                CurrenState.Update();
             }
         }
 
         protected virtual void FixedUpdate()
         {
-            if (CurrenState != null && CurrenState.OnFixedUpdate != null)
+            if (CurrenState != null)
             {
-                CurrenState.OnFixedUpdate();
+                CurrenState.FixedUpdate();
             }
         }
     }

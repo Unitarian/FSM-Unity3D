@@ -32,3 +32,6 @@ sysinfo.txt
 # Builds
 *.apk
 *.unitypackage
+FSM-Source/.DS_Store
+.DS_Store
+.DS_Store

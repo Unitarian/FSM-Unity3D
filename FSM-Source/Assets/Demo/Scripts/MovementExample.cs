@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using FSM;
 
 public class MovementExample : StateMachine
@@ -26,19 +24,19 @@ public class MovementExample : StateMachine
 
     protected override void SetupStateHandlers()
     {
-        int index = 0;
         IdleState = new State("Idle", (int)MovementStates.Idle);
-        IdleState.OnBegin = IdleState_OnBegin;
-        IdleState.OnEnd = IdleState_OnEnd;
+        IdleState.OnBegin += IdleState_OnBegin;
+        IdleState.OnEnd += IdleState_OnEnd;
+
 
         PingpongXState = new State("PingPongXState", (int)MovementStates.MovingX);
-        PingpongXState.OnBegin = PingpongXState_OnBegin;
-        PingpongXState.OnUpdate = PingpongXState_OnUpdate;
+        PingpongXState.OnBegin += PingpongXState_OnBegin;
+        PingpongXState.OnUpdate += PingpongXState_OnUpdate;
 
 
         PingpongYState = new State("PingPongYState", (int)MovementStates.MovingY);
-        PingpongYState.OnBegin = PingpongYState_OnBegin;
-        PingpongYState.OnUpdate = PingpongYState_OnUpdate;
+        PingpongYState.OnBegin += PingpongYState_OnBegin;
+        PingpongYState.OnUpdate += PingpongYState_OnUpdate;
 
         UpdateState(IdleState);
     }

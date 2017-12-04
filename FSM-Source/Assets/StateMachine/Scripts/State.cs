@@ -4,13 +4,13 @@ namespace FSM
 {
     public class State
     {
-        private int _id;
+        int _id;
         public int Id
         {
             get { return _id; }
         }
 
-        private string _name;
+        string _name;
         public string Name
         {
             get { return _name; }
@@ -37,9 +37,42 @@ namespace FSM
             return string.Format("[{0}][{1}]", Id, Name);
         }
 
-        public Action OnBegin;
-        public Action OnUpdate;
-        public Action OnFixedUpdate;
-        public Func<State, bool> OnEnd;
+        public event Action OnBegin;
+        public event Action OnUpdate;
+        public event Action OnFixedUpdate;
+        public event Func<State, bool> OnEnd;
+
+        internal void Begin()
+        {
+            if (OnBegin != null)
+            {
+                OnBegin();
+            }
+        }
+
+        internal void Update()
+        {
+            if (OnUpdate != null)
+            {
+                OnUpdate();
+            }
+        }
+
+        internal void FixedUpdate()
+        {
+            if (OnFixedUpdate != null)
+            {
+                OnFixedUpdate();
+            }
+        }
+
+        internal bool End(State newState)
+        {
+            if (OnEnd != null)
+            {
+                return OnEnd(newState);
+            }
+            return true;
+        }
     }
 }
